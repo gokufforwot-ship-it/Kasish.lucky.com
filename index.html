@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#f6d9df">
+<title>Kasish — This is for you</title>
+<style>
+:root{
+ --ink:#4b3032;--deep:#704047;--rose:#c98691;--pink:#f4d5dc;
+ --cream:#fff7ef;--paper:#ecd3a7;--brown:#765039;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Georgia,"Times New Roman",serif;color:var(--ink)}
+body{
+ overflow:hidden;
+ background:
+ radial-gradient(circle at 15% 15%,rgba(255,255,255,.9),transparent 30%),
+ radial-gradient(circle at 85% 20%,rgba(255,213,226,.7),transparent 28%),
+ linear-gradient(145deg,#fff2ea,#f8dbe3 48%,#fff0df);
+}
+.screen{position:fixed;inset:0;display:none;overflow-y:auto;padding:22px 16px 90px;animation:in .55s ease both}
+.screen.active{display:block}
+@keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.center{min-height:100%;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero{
+ width:min(760px,100%);padding:45px 25px;border-radius:34px;
+ background:rgba(255,250,247,.78);border:1px solid rgba(153,91,100,.25);
+ box-shadow:0 25px 70px rgba(94,53,58,.17);backdrop-filter:blur(10px)
+}
+.badge{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#9a646a}
+h1{font-size:clamp(50px,14vw,92px);margin:13px 0 3px;color:var(--deep)}
+h2{font-size:clamp(31px,8vw,54px);margin:8px 0;color:var(--deep)}
+h3{color:var(--deep)}
+.hero .sub{font-size:clamp(18px,4.5vw,26px);line-height:1.5;margin:8px 0 25px}
+.by{font-weight:bold;color:#945b63}
+button{
+ font:inherit;cursor:pointer;border:0;transition:.2s transform,.2s box-shadow
+}
+button:active{transform:scale(.96)}
+.primary{padding:16px 28px;border-radius:999px;background:var(--deep);color:#fff8f5;font-weight:bold;box-shadow:0 10px 24px rgba(83,46,52,.22)}
+.nav{
+ position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:50;
+ display:flex;gap:7px;padding:8px;border-radius:999px;background:rgba(255,250,248,.9);
+ box-shadow:0 10px 30px rgba(70,40,45,.18);border:1px solid #e7c5c7
+}
+.nav button{width:43px;height:43px;border-radius:50%;background:#f4dfe1;font-size:19px}
+.nav button.home{background:var(--deep);color:white}
+.wrap{width:min(920px,100%);margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.back{padding:10px 15px;border-radius:999px;background:rgba(255,250,247,.8);color:var(--deep);font-weight:bold}
+.subtitle{text-align:center;max-width:680px;margin:0 auto 28px;line-height:1.65;font-size:17px}
+.paper{
+ max-width:800px;margin:0 auto;padding:38px 27px;background:var(--paper);
+ color:#4a3428;position:relative;box-shadow:0 20px 55px rgba(75,45,25,.28);
+ border:11px solid #7a5139;
+ border-image:linear-gradient(125deg,#603b2b,#ad7749,#69412d,#b07b4c,#65402c) 1;
+ transform:rotate(-.25deg)
+}
+.paper:before{content:"";position:absolute;inset:-3px;border:2px dashed rgba(76,45,27,.32);pointer-events:none}
+.doll{font-size:80px;text-align:center;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
+.paper h2{text-align:center;color:#68402d;font-size:30px}
+.paper p{white-space:pre-line;line-height:1.78;font-size:16px}
+.seal{text-align:center;font-size:25px;margin-top:22px}
+.chocolate-stage,.teddy-stage{
+ min-height:390px;border-radius:35px;padding:30px 18px;text-align:center;
+ background:rgba(255,249,245,.78);box-shadow:0 20px 55px rgba(80,45,50,.14);border:1px solid #edc9cc
+}
+.chocolate-box{display:flex;justify-content:center;align-items:end;gap:12px;flex-wrap:wrap;margin:25px auto}
+.choc{
+ width:64px;height:90px;border-radius:10px 10px 17px 17px;background:#6b3b28;border:3px solid #4d291d;
+ display:flex;align-items:center;justify-content:center;color:#ffe8c4;font-size:27px;
+ box-shadow:0 12px 18px rgba(65,35,25,.2);animation:floatch 2.6s ease-in-out infinite
+}
+.choc:nth-child(2){animation-delay:.2s}.choc:nth-child(3){animation-delay:.4s}.choc:nth-child(4){animation-delay:.6s}
+.choc:nth-child(5){animation-delay:.8s}.choc:nth-child(6){animation-delay:1s}
+@keyframes floatch{50%{transform:translateY(-13px) rotate(2deg)}}
+.choc small{font-size:10px;display:block}
+.message-box{max-width:650px;margin:25px auto 0;padding:19px 20px;border-radius:20px;background:#fff3f0;line-height:1.65}
+.teddy-big{font-size:145px;animation:teddy 2s ease-in-out infinite}
+@keyframes teddy{50%{transform:scale(1.05) rotate(2deg)}}
+.hug{display:inline-block;margin-top:14px;padding:14px 22px;border-radius:999px;background:#edc5cc;color:#633b42;font-weight:bold}
+.quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:17px}
+.quote{
+ background:rgba(255,249,246,.9);padding:23px 20px;border-radius:24px;
+ box-shadow:0 12px 30px rgba(85,47,53,.1);border:1px solid #edc8cc;line-height:1.65
+}
+.quote b{display:block;font-size:21px;color:#7a454e;margin-bottom:7px}
+.spark{position:fixed;z-index:1;pointer-events:none;animation:rise linear infinite;opacity:.55}
+@keyframes rise{from{transform:translateY(110vh) rotate(0)}to{transform:translateY(-15vh) rotate(300deg)}}
+@media(max-width:560px){
+ .screen{padding:16px 12px 82px}.paper{padding:32px 17px;border-width:8px}
+ .paper p{font-size:15px}.nav button{width:39px;height:39px}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<section id="home" class="screen active center">
+ <div class="hero">
+  <div class="badge">A tiny surprise made specially for you</div>
+  <h1>Kasish</h1>
+  <div class="hero .sub"></div>
+  <p class="sub"><b>This is for you 🧿💗🎀</b><br><span class="by">Made with lots of love by your Bhaiyuuuu 🧸🌸</span></p>
+  <button class="primary" onclick="go('letter')">Open your surprise ✨</button>
+ </div>
+</section>
+
+<section id="letter" class="screen">
+ <div class="wrap">
+  <div class="top"><button class="back" onclick="go('home')">← Home</button><span>💌 01 / 04</span></div>
+  <h2 style="text-align:center">A Letter For You 🎀</h2>
+  <p class="subtitle">A little handwritten-style corner from your Bhaiyuuuu. Read it whenever you need a reminder that you're cared for. 🧸</p>
+  <div class="paper">
+   <div class="doll">🧸🎀</div>
+   <h2>🎀 Meri Chhoti Si Gudiya 🧸💗</h2>
+   <p>Hey cutie pieee 🌸✨
+
+Bas ek chhoti si baat kehni thi… kabhi bhi kisi cheez ki tension mat lena, okay? 🧿💗 Life mein kuch bhi ho, mood kharab ho, koi problem ho, ya bas mann thoda sa off ho — apna bhai yaad rakhna. 🧸🎀
+
+Aur haan, kabhi kabhi main tujhe tang karunga, irritate karunga, faltu ki bakwaas bhi karunga 😭😂… but that's literally my job as your bhai. 🧸💗
+
+Distance chahe kitna bhi ho, meri care kabhi distance se decide nahi hogi. 🌙✨
+Tu khush rahe, smile karti rahe, apna khayal rakhe, bas itna hi chahiye mujhe. 🌸💕
+
+And please, jab bhi life thodi difficult lage, ye mat sochna ki tujhe sab kuch akela handle karna hai.
+Tera bhaiyuuu hai na. 🤍👀
+
+I love you sooooo much, meri chhoti si gudiya. 🌷🎀💗
+Stay happy, stay cute, 🧿👀, take care of yourself, and keep that pretty smile always. 🌷✨🧸
+
+Lots and lots of love from your bhai. 💗🌸⭐
+
+Now smile, cutie pie. 😭🧸💕✨</p>
+   <div class="seal">🧿 💗 🌸 🎀</div>
+  </div>
+ </div>
+</section>
+
+<section id="choco" class="screen">
+ <div class="wrap">
+  <div class="top"><button class="back" onclick="go('home')">← Home</button><span>🍫 02 / 04</span></div>
+  <h2 style="text-align:center">Chocolate Corner 🍫</h2>
+  <p class="subtitle">A whole bunch of virtual chocolates because Kasish deserves a little extra sweetness today. 💗</p>
+  <div class="chocolate-stage">
+   <div style="font-size:50px">🍫 ✨ 🍫</div>
+   <div class="chocolate-box">
+    <div class="choc">🍫</div><div class="choc">🍫</div><div class="choc">🍫</div>
+    <div class="choc">🍫</div><div class="choc">🍫</div><div class="choc">🍫</div>
+   </div>
+   <div class="message-box"><b>For my little gudiya 🌸</b><br>
+   “Here, take all of them. 😭🍫 You don't have to share these with anyone. Your Bhaiyuuuu officially says so. 🧸💗”</div>
+  </div>
+ </div>
+</section>
+
+<section id="teddy" class="screen">
+ <div class="wrap">
+  <div class="top"><button class="back" onclick="go('home')">← Home</button><span>🧸 03 / 04</span></div>
+  <h2 style="text-align:center">Your Teddy Hug 🧸</h2>
+  <p class="subtitle">For those moments when your Bhaiyuuuu isn't physically nearby.</p>
+  <div class="teddy-stage">
+   <div class="teddy-big">🧸</div>
+   <div class="message-box"><b>Come here, little gudiya. 🤍</b><br>
+   Consider this a giant virtual hug from your Bhaiyuuuu. Distance doesn't get to cancel hugs. 🫂🌸</div>
+   <button class="hug" onclick="hug()">Tap for a bigger hug 🫂</button>
+   <div id="hugText" style="margin-top:16px;font-weight:bold;color:#85515a"></div>
+  </div>
+ </div>
+</section>
+
+<section id="deserve" class="screen">
+ <div class="wrap">
+  <div class="top"><button class="back" onclick="go('home')">← Home</button><span>🌷 04 / 04</span></div>
+  <h2 style="text-align:center">You Deserve This 🌷</h2>
+  <p class="subtitle">Keep these little reminders close, especially on days when you need them most.</p>
+  <div class="quote-grid">
+   <div class="quote"><b>🌸 You deserve care.</b>You deserve people who notice when you're not okay and remind you that you don't have to carry everything alone.</div>
+   <div class="quote"><b>🧿 You matter.</b>Your feelings, your happiness, your peace and your little everyday moments all matter.</div>
+   <div class="quote"><b>🎀 You can have difficult days.</b>You don't have to be cheerful every second. Take things gently, one moment at a time.</div>
+   <div class="quote"><b>🧸 You are never forgotten.</b>Even when there's distance, you can still be deeply loved and remembered.</div>
+   <div class="quote"><b>✨ You deserve softness.</b>Kind words, peaceful moments, genuine smiles and people who make you feel valued.</div>
+   <div class="quote"><b>💗 You are precious.</b>Never measure your importance by one bad day, one mistake or one difficult moment.</div>
+   <div class="quote"><b>🌙 You deserve peace.</b>It's okay to rest, breathe and give yourself time when life feels overwhelming.</div>
+   <div class="quote"><b>⭐ Always remember.</b>Your Bhaiyuuuu is cheering for you, caring about you and wishing the very best for you.</div>
+  </div>
+ </div>
+</section>
+
+<nav class="nav">
+ <button class="home" onclick="go('home')">⌂</button>
+ <button onclick="go('letter')">💌</button>
+ <button onclick="go('choco')">🍫</button>
+ <button onclick="go('teddy')">🧸</button>
+ <button onclick="go('deserve')">🌷</button>
+</nav>
+
+<script>
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const el=document.getElementById(id); el.classList.add('active'); el.scrollTop=0;
+}
+function hug(){
+ document.getElementById('hugText').textContent="🫂💗 HUG DELIVERED! +∞% Bhaiyuuuu care 🌸🧿";
+}
+const symbols=["💗","✨","🌸","🎀","⭐","🧿","♡"];
+for(let i=0;i<20;i++){
+ const e=document.createElement("span");e.className="spark";e.textContent=symbols[i%symbols.length];
+ e.style.left=Math.random()*100+"vw";e.style.fontSize=12+Math.random()*17+"px";
+ e.style.animationDuration=6+Math.random()*8+"s";e.style.animationDelay=-Math.random()*10+"s";
+ document.getElementById("particles").appendChild(e);
+}
+</script>
+</body>
+</html>
